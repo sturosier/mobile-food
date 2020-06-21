@@ -2,7 +2,7 @@ const haversine = require('haversine');
 const DISTANCE_UNIT = 'mile';
 
 module.exports = class MapUtil {
-    getLocationsByDistance(startLocation, endLocations, limit = 5) {
+    getLocationsByDistance(startLocation, endLocations, limit) {
         let result = [];
         for (let endLocation of endLocations) {
             let location = endLocation;
@@ -10,7 +10,7 @@ module.exports = class MapUtil {
             result.push(location);
         }
         this.sortByDistance(result);
-        return result.slice(0, limit + 1);
+        return result.slice(0, limit);
     }
 
     calculateDistance(start, end) {

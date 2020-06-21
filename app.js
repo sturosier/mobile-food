@@ -4,44 +4,42 @@ const dataLoader = require('./data/dataLoader');
 const mapUtil = require('./utils/mapUtil');
 const paramParser = require('./utils/paramParser');
 const parser = new paramParser();
-const map = new mapUtil();
-const loader = new dataLoader();
 const PORT = 3000;
 
 //TODO
 /**
- * 1) Move route to different file -
- * accept lat and long -
- * filter trucks
- * accept limit
- * support port as env var. -
- * Add unit -tests
  * Update README
  */
 let data = [];
 let dataLoaded = false;
-async function init() {
-    if(!dataLoaded) {
+const RECORDS_LIMIT = 5;
+
+async function loadData() {
+    if (!dataLoaded) {
+        const loader = new dataLoader();
+
         data = await loader.getData();
         dataLoaded = true;
     }
 }
 
-app.get('/mobile-food/find', async (request, response) => {
-    await init();
+app.get('/food-truck/find', async (request, response) => {
+    await loadData();
 
-    let error = parser.parseQueryArguments(request);
-    if(error) {
+    const error = parser.parseQueryArguments(request);
+    if (error) {
         response.status(400).json(error);
         return;
     }
 
-    let startLocation = {
+    const startLocation = {
         Latitude: request.query.latitude,
         Longitude: request.query.longitude
     };
 
-    response.send(map.getLocationsByDistance(startLocation, data));
+    const map = new mapUtil();
+    const recordsLimit = request.query.limit !== undefined ? parseInt(request.query.limit) : RECORDS_LIMIT;
+    response.send(map.getLocationsByDistance(startLocation, data, recordsLimit));
 });
 
 app.listen(PORT);

@@ -3,13 +3,13 @@ const MapUtil = require('../utils/mapUtil');
 test('should calculate distances without error', () => {
     let map = new MapUtil();
 
-    let result = map.getLocationsByDistance(startLocation, locations);
+    let result = map.getLocationsByDistance(startLocation, locations, 3);
     expect(result.length).toBe(3);
 });
 
 test('should return distances in ASC order', () => {
     let map = new MapUtil();
-    let result = map.getLocationsByDistance(startLocation, locations);
+    let result = map.getLocationsByDistance(startLocation, locations, 3);
 
     expect(result[0].distance_in_miles).toBeLessThan(result[1].distance_in_miles);
     expect(result[1].distance_in_miles).toBeLessThan(result[2].distance_in_miles);
