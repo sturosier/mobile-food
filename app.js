@@ -2,17 +2,15 @@ const express = require('express');
 const app = express();
 const dataLoader = require('./data/dataLoader');
 const mapUtil = require('./utils/mapUtil');
+const map = new mapUtil();
 const paramParser = require('./utils/paramParser');
 const parser = new paramParser();
-const PORT = 3000;
 
-//TODO
-/**
- * Update README
- */
+const PORT = 3000;
+const RECORDS_LIMIT = 5;
+
 let data = [];
 let dataLoaded = false;
-const RECORDS_LIMIT = 5;
 
 async function loadData() {
     if (!dataLoaded) {
@@ -37,9 +35,8 @@ app.get('/food-truck/find', async (request, response) => {
         Longitude: request.query.longitude
     };
 
-    const map = new mapUtil();
-    const recordsLimit = request.query.limit !== undefined ? parseInt(request.query.limit) : RECORDS_LIMIT;
-    response.send(map.getLocationsByDistance(startLocation, data, recordsLimit));
+    const numberOfRecords = request.query.limit !== undefined ? parseInt(request.query.limit) : RECORDS_LIMIT;
+    response.send(map.getLocationsByDistance(startLocation, data, numberOfRecords));
 });
 
 app.listen(PORT);

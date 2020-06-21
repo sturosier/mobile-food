@@ -1,5 +1,5 @@
 - Food Truck Location REST API -
-    - Given a location (latidude & longitude), we find all the food trucks within the area, sorted by distance (ASC order) 
+    - Given a location (latitude & longitude), we find all the food trucks within the area, sorted by distance (ASC order) 
     - The default number of locations returned is 5, but the limit can be modified.
     - In order to calculate a distance, we use a NodeJS library that implements Haversine's formula (see more on Wikipedia)
 
@@ -9,7 +9,7 @@
     
 Developer's Guide:    
 1) install nodeJS from https://nodejs.org/en/download/
-2) Make sure that port 3000 is available on you machine, or change the port number in app.js file
+2) Make sure that port 3000 is available on you machine, or change the `PORT` constant in the `app.js` file
 3) From the root folder, run `npm install`
 4) To make sure everything is fine, run the unit-tests with `npm test`
 5) Start the application with `npm start`

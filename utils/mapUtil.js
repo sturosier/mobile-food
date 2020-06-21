@@ -4,7 +4,7 @@ const DISTANCE_UNIT = 'mile';
 module.exports = class MapUtil {
     getLocationsByDistance(startLocation, endLocations, limit) {
         let result = [];
-        for (let endLocation of endLocations) {
+        for (const endLocation of endLocations) {
             let location = endLocation;
             location.distance_in_miles = this.calculateDistance(startLocation, endLocation);
             result.push(location);
@@ -14,11 +14,11 @@ module.exports = class MapUtil {
     }
 
     calculateDistance(start, end) {
-        let pointA = {
+        const pointA = {
             latitude: parseFloat(start.Latitude),
             longitude: parseFloat(start.Longitude)
         };
-        let pointB = {
+        const pointB = {
             latitude: end.Latitude,
             longitude: end.Longitude
         };

@@ -35,7 +35,7 @@ module.exports = class ParamParser {
      * @returns {boolean|boolean}
      */
     validLimitArg(request) {
-        if(request.query.limit === undefined) {
+        if (request.query.limit === undefined) {
             return true;
         }
 
