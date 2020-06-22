@@ -1,5 +1,6 @@
 - Food Truck Location REST API -
-    - Given a location (latitude & longitude), we find all the food trucks within the area, sorted by distance (ASC order) 
+    - Given a valid location (latitude & longitude), we calculate the distance to all the food trucks. The result is sorted by distance.
+    - Only the facilities with 'APPROVED' Status and 'Truck' FacilityType are queried.
     - The default number of locations returned is 5, but the limit can be modified.
     - In order to calculate a distance, we use a NodeJS library that implements Haversine's formula (see more on Wikipedia)
 

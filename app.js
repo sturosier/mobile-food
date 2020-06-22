@@ -16,7 +16,7 @@ async function loadData() {
     if (!dataLoaded) {
         const loader = new dataLoader();
 
-        data = await loader.getData();
+        data = await loader.getFoodTrucks();
         dataLoaded = true;
     }
 }
